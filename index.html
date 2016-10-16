@@ -330,7 +330,7 @@
             </div>
         </div>
         <div id="night-button" class="item">
-            <div id="day_icon" class="item_wrap" style="display: none">
+            <div id="day_icon" class="item-wrap" style="display: none">
                 <div class="icon-day"></div>
                 <div class="icon-text">
                     白天
@@ -372,11 +372,14 @@
             top_nav:$('#top-nav'),
             bottom_nav:$('.bottom_nav'),
             font_container:$('.font-container'),
-            font_button:$('#font-button')
+            font_button:$('#font-button'),
+            bk_container:$('#bk-container'),
+            night_button:$('#night-button')
         }
         var Win = $(window);
         var Doc = $(document);
         var RootContainer = $('#fiction_container');
+        var NightMode = false;   //是否是夜间模式
 
         //字体设置信息
         var initFontSize = Util.StorageGetter('font-size');
@@ -430,9 +433,23 @@
                    Dom.font_button.removeClass('current');
                }
             });
-
+            //切换白天、黑夜模式
             $('#night-button').click(function () {
                 //触发背景切换事件
+                if(NightMode){
+                    $('#day_icon').hide();
+                    $('#night_icon').show();
+                    NightMode = false;
+                    $('body').css('background-color','#0f1410');
+                    Util.StorageSetter('background_color','#0f1410');
+                }else{
+                    $('#day_icon').show();
+                    $('#night_icon').hide();
+                    NightMode = true;
+                    $('body').css('background-color','#e9dfc7');
+                    Util.StorageSetter('background_color','#e9dfc7');
+                }
+
             });
 
             //按钮的多样式效果
@@ -462,7 +479,11 @@
                 RootContainer.css('font-size',initFontSize);
                 Util.StorageSetter('font-size',initFontSize);
             });
+            //改变背景颜色
             $('.bk-container').click(function () {
+                $('#bk-container').find('.bk-container-current').css('display','none');
+                $(this).find('.bk-container-current').css('display','block');
+
                 var color = $(this).data('color');
                 $('body').css('background',color);
                 Util.StorageSetter('background_color',color);
