@@ -450,24 +450,6 @@
                 }, 'json');
             });
 
-            /*
-             var getFictionInfo = function(callback) {
-             $.get("/data/chapter.json", function(data) {
-             Title = data.title;
-             $('#nav_title').html('返回书架');
-             window.ChaptersData = data.chapters;
-             window.chapter_data = data.chapters;
-             for (var i = 0; i < data.chapters.length; i++) {
-             Chapters.push({
-             "chapter_id" : data.chapters[i].chapter_id,
-             "title" : data.chapters[i].title
-             })
-             }
-
-             callback && callback();
-             }, 'json');
-             };
-             */
             //获得上一章内容
             var prevChapter = function() {
                 Chapter_id = parseInt(Chapter_id);
